@@ -5,16 +5,13 @@ import Link from 'next/link'
 export default function Banner() {
   return (
     <section className="relative">
-      {/* Banner principal */}
       <div className="relative h-[70vh] md:h-[85vh] bg-gradient-to-br from-brand-nude via-brand-cream to-brand-pink-light overflow-hidden">
-        {/* Padrão decorativo */}
         <div className="absolute inset-0">
           <div className="absolute top-20 right-10 w-72 h-72 bg-brand-pink/20 rounded-full blur-3xl" />
           <div className="absolute bottom-20 left-10 w-96 h-96 bg-brand-nude/40 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/30 rounded-full blur-3xl" />
         </div>
 
-        {/* Conteúdo */}
         <div className="container-custom relative z-10 h-full flex flex-col justify-center">
           <div className="max-w-xl">
             <span className="inline-block text-xs tracking-[0.3em] uppercase text-brand-pink-dark font-medium mb-4 animate-fade-in-up">
@@ -28,17 +25,16 @@ export default function Banner() {
               Peças pensadas para mulheres que valorizam conforto, elegância e personalidade no dia a dia.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <Link href="/" className="btn-primary text-center">
+              <Link href="/produtos?filtro=novidades" className="btn-primary text-center">
                 Comprar agora
               </Link>
-              <Link href="/" className="btn-outline text-center">
+              <Link href="/produtos" className="btn-outline text-center">
                 Ver coleção
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Decoração lateral - imagem placeholder */}
         <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[45%]">
           <div className="absolute inset-0 bg-gradient-to-br from-brand-pink-light/50 to-brand-nude/50 flex items-center justify-center">
             <div className="w-80 h-[500px] bg-white/40 rounded-2xl backdrop-blur-sm flex items-center justify-center">
@@ -53,7 +49,6 @@ export default function Banner() {
         </div>
       </div>
 
-      {/* Barra de benefícios */}
       <div className="bg-brand-dark text-white">
         <div className="container-custom py-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
@@ -65,9 +60,7 @@ export default function Banner() {
             ].map((benefit) => (
               <div key={benefit.text} className="flex items-center justify-center gap-2 text-center">
                 <span className="text-base">{benefit.icon}</span>
-                <span className="text-2xs md:text-xs text-white/80 tracking-wide">
-                  {benefit.text}
-                </span>
+                <span className="text-2xs md:text-xs text-white/80 tracking-wide">{benefit.text}</span>
               </div>
             ))}
           </div>

@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { useCart } from '@/lib/CartContext'
 
 const navLinks = [
-  { href: '/', label: 'Novidades' },
-  { href: '/', label: 'Roupas' },
-  { href: '/', label: 'Calçados' },
-  { href: '/', label: 'Acessórios' },
-  { href: '/', label: 'Promoções', highlight: true },
+  { href: '/produtos?filtro=novidades', label: 'Novidades' },
+  { href: '/produtos?categoria=vestidos', label: 'Roupas' },
+  { href: '/produtos?categoria=calcados', label: 'Calçados' },
+  { href: '/produtos?categoria=acessorios', label: 'Acessórios' },
+  { href: '/produtos?filtro=promocoes', label: 'Promoções', highlight: true },
 ]
 
 export default function Header() {
@@ -24,29 +24,28 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Fechar menu ao navegar
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
   return (
     <>
-      {/* Barra de destaque */}
       <div className="bg-brand-dark text-white text-center py-2 px-4">
         <p className="text-[10px] md:text-xs tracking-widest uppercase font-light">
           Frete grátis acima de R$ 199 | Parcele em até 6x sem juros
         </p>
       </div>
 
-      {/* Header principal */}
-      <header
-        className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${
-          scrolled ? 'shadow-md' : 'shadow-sm'
-        }`}
-      >
+      <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
         <div className="container-custom">
           <div className="flex items-center justify-between h-14 md:h-20">
-            {/* Menu mobile */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden p-2 -ml-2"
-              aria-label="Menu"
-            >
+            <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden p-2 -ml-2" aria-label="Menu">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 {menuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -56,7 +55,6 @@ export default function Header() {
               </svg>
             </button>
 
-            {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <h1 className="font-display text-lg md:text-2xl tracking-tight text-brand-dark">
                 <span className="font-semibold">Plataforma</span>
@@ -64,7 +62,6 @@ export default function Header() {
               </h1>
             </Link>
 
-            {/* Nav desktop */}
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
@@ -79,7 +76,6 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Ícones */}
             <div className="flex items-center gap-0.5 md:gap-3">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
@@ -91,17 +87,12 @@ export default function Header() {
                 </svg>
               </button>
 
-              <Link
-                href="/"
-                className="hidden md:flex p-2 hover:bg-gray-50 rounded-full transition-colors"
-                aria-label="Minha conta"
-              >
+              <Link href="/produtos" className="hidden md:flex p-2 hover:bg-gray-50 rounded-full transition-colors" aria-label="Produtos">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
               </Link>
 
-              {/* Carrinho */}
               <button
                 onClick={() => setIsOpen(true)}
                 className="p-2 hover:bg-gray-50 rounded-full transition-colors relative"
@@ -120,7 +111,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Barra de busca */}
         {searchOpen && (
           <div className="absolute top-full left-0 right-0 bg-white shadow-lg animate-slide-down border-t">
             <div className="container-custom py-4">
@@ -145,7 +135,6 @@ export default function Header() {
         )}
       </header>
 
-      {/* Menu mobile overlay */}
       {menuOpen && (
         <>
           <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={() => setMenuOpen(false)} />
@@ -176,17 +165,17 @@ export default function Header() {
               ))}
             </nav>
             <div className="p-6 border-t mt-4">
-              <Link href="/" className="flex items-center gap-3 py-3 text-sm text-gray-600 hover:text-brand-dark">
+              <Link href="/produtos" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 py-3 text-sm text-gray-600 hover:text-brand-dark">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
-                Minha Conta
+                Todos os Produtos
               </Link>
-              <Link href="/" className="flex items-center gap-3 py-3 text-sm text-gray-600 hover:text-brand-dark">
+              <Link href="/checkout" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 py-3 text-sm text-gray-600 hover:text-brand-dark">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
                 </svg>
-                Lista de Desejos
+                Minha Sacola
               </Link>
             </div>
           </div>

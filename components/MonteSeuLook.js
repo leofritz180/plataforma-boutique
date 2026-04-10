@@ -1,13 +1,26 @@
+'use client'
+
 import Link from 'next/link'
 import { lookProducts } from '@/lib/data'
+import { useCart } from '@/lib/CartContext'
+import { getProductById } from '@/lib/data'
 
 export default function MonteSeuLook() {
+  const { addItem } = useCart()
   const totalPrice = lookProducts.reduce((sum, p) => sum + p.price, 0)
+
+  function handleBuyLook() {
+    lookProducts.forEach((item) => {
+      const full = getProductById(item.id)
+      if (full) {
+        addItem(full, full.sizes?.[1] || full.sizes?.[0] || 'M', 1)
+      }
+    })
+  }
 
   return (
     <section className="py-16 md:py-24 bg-brand-cream">
       <div className="container-custom">
-        {/* Título */}
         <div className="text-center mb-12">
           <h2 className="section-title">
             Monte seu <span className="italic font-light">look</span>
@@ -18,7 +31,6 @@ export default function MonteSeuLook() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-5xl mx-auto">
-          {/* Visual do look */}
           <div className="relative aspect-[3/4] bg-gradient-to-br from-brand-nude-light to-brand-pink-light rounded-2xl overflow-hidden flex items-center justify-center">
             <div className="text-center">
               <svg className="w-24 h-24 text-brand-pink/30 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
@@ -28,7 +40,6 @@ export default function MonteSeuLook() {
             </div>
           </div>
 
-          {/* Lista de produtos */}
           <div>
             <div className="space-y-6">
               {lookProducts.map((item, idx) => (
@@ -41,15 +52,9 @@ export default function MonteSeuLook() {
                     <span className="text-xs text-brand-pink-dark/50 font-light">{idx + 1}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-2xs tracking-widest uppercase text-brand-pink-dark font-medium">
-                      {item.label}
-                    </span>
-                    <h4 className="text-sm font-medium text-brand-dark mt-0.5 group-hover:text-brand-pink-dark transition-colors truncate">
-                      {item.name}
-                    </h4>
-                    <p className="text-sm font-semibold text-brand-dark mt-1">
-                      R$ {item.price.toFixed(2).replace('.', ',')}
-                    </p>
+                    <span className="text-2xs tracking-widest uppercase text-brand-pink-dark font-medium">{item.label}</span>
+                    <h4 className="text-sm font-medium text-brand-dark mt-0.5 group-hover:text-brand-pink-dark transition-colors truncate">{item.name}</h4>
+                    <p className="text-sm font-semibold text-brand-dark mt-1">R$ {item.price.toFixed(2).replace('.', ',')}</p>
                   </div>
                   <svg className="w-5 h-5 text-gray-300 group-hover:text-brand-dark transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -58,15 +63,15 @@ export default function MonteSeuLook() {
               ))}
             </div>
 
-            {/* Total */}
             <div className="mt-8 p-5 bg-brand-dark text-white rounded-xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm text-white/70">Look completo por</span>
-                <span className="text-2xl font-display font-semibold">
-                  R$ {totalPrice.toFixed(2).replace('.', ',')}
-                </span>
+                <span className="text-2xl font-display font-semibold">R$ {totalPrice.toFixed(2).replace('.', ',')}</span>
               </div>
-              <button className="w-full py-3 bg-white text-brand-dark text-xs tracking-widest uppercase font-medium hover:bg-brand-pink-light transition-colors">
+              <button
+                onClick={handleBuyLook}
+                className="w-full py-3 bg-white text-brand-dark text-xs tracking-widest uppercase font-medium hover:bg-brand-pink-light transition-colors active:scale-[0.98]"
+              >
                 Comprar look completo
               </button>
             </div>

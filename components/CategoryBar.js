@@ -3,14 +3,14 @@
 import Link from 'next/link'
 
 const categories = [
-  { name: 'Vestidos', emoji: '👗' },
-  { name: 'Blusas', emoji: '👚' },
-  { name: 'Calças', emoji: '👖' },
-  { name: 'Saias', emoji: '🩱' },
-  { name: 'Conjuntos', emoji: '✨' },
-  { name: 'Calçados', emoji: '👡' },
-  { name: 'Bolsas', emoji: '👜' },
-  { name: 'Acessórios', emoji: '💍' },
+  { name: 'Vestidos', slug: 'vestidos', emoji: '👗' },
+  { name: 'Blusas', slug: 'blusas', emoji: '👚' },
+  { name: 'Calças', slug: 'calcas', emoji: '👖' },
+  { name: 'Saias', slug: 'saias', emoji: '🩱' },
+  { name: 'Conjuntos', slug: 'conjuntos', emoji: '✨' },
+  { name: 'Calçados', slug: 'calcados', emoji: '👡' },
+  { name: 'Bolsas', slug: 'acessorios', emoji: '👜' },
+  { name: 'Acessórios', slug: 'acessorios', emoji: '💍' },
 ]
 
 export default function CategoryBar() {
@@ -21,7 +21,7 @@ export default function CategoryBar() {
           {categories.map((cat) => (
             <Link
               key={cat.name}
-              href="/"
+              href={`/produtos?categoria=${cat.slug}`}
               className="flex flex-col items-center gap-2 min-w-[72px] group"
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-nude-light rounded-full flex items-center justify-center text-2xl group-hover:bg-brand-pink-light transition-colors group-hover:scale-105 transform duration-200">

@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import CartDrawer from '@/components/CartDrawer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { ToastProvider } from '@/components/Toast'
 import { CartProvider } from '@/lib/CartContext'
 
 export const metadata = {
@@ -15,15 +16,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body className="min-h-screen flex flex-col">
-        <CartProvider>
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <CartDrawer />
-          <WhatsAppButton />
-        </CartProvider>
+        <ToastProvider>
+          <CartProvider>
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <CartDrawer />
+            <WhatsAppButton />
+          </CartProvider>
+        </ToastProvider>
       </body>
     </html>
   )
