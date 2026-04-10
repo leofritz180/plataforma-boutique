@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, Suspense } from 'react'
+import { useState, useMemo, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import ProductGrid from '@/components/ProductGrid'
 import { products } from '@/lib/data'
@@ -42,6 +42,11 @@ function ProductsContent() {
 
   const [activeCategory, setActiveCategory] = useState(categoryParam)
   const [sort, setSort] = useState('relevancia')
+
+  // Sincronizar com URL quando navega via Link
+  useEffect(() => {
+    setActiveCategory(categoryParam)
+  }, [categoryParam])
 
   const filtered = useMemo(() => {
     let result = [...products]
