@@ -1,4 +1,4 @@
-import Banner from '@/components/Banner'
+import HeroCarousel from '@/components/HeroCarousel'
 import CategoryBar from '@/components/CategoryBar'
 import ProductGrid from '@/components/ProductGrid'
 import MonteSeuLook from '@/components/MonteSeuLook'
@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <Banner />
+      <HeroCarousel />
       <CategoryBar />
 
       {/* Mais Vendidos */}
