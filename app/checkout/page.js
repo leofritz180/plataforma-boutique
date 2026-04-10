@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/lib/CartContext'
+import { Wallet, CreditCard, FileText } from 'lucide-react'
 
 export default function CheckoutPage() {
   const { items, totalPrice, removeItem, updateQuantity, clearCart } = useCart()
@@ -255,9 +256,9 @@ export default function CheckoutPage() {
                   <h2 className="text-sm tracking-widest uppercase font-medium text-brand-dark mb-5">Pagamento</h2>
                   <div className="space-y-3">
                     {[
-                      { value: 'pix', label: 'Pix', desc: '10% de desconto', icon: '💚' },
-                      { value: 'credit', label: 'Cartão de crédito', desc: 'até 6x sem juros', icon: '💳' },
-                      { value: 'boleto', label: 'Boleto bancário', desc: '3 dias úteis', icon: '📄' },
+                      { value: 'pix', label: 'Pix', desc: '10% de desconto', Icon: Wallet },
+                      { value: 'credit', label: 'Cartão de crédito', desc: 'até 6x sem juros', Icon: CreditCard },
+                      { value: 'boleto', label: 'Boleto bancário', desc: '3 dias úteis', Icon: FileText },
                     ].map((method) => (
                       <label
                         key={method.value}
@@ -282,7 +283,7 @@ export default function CheckoutPage() {
                             <div className="w-2.5 h-2.5 rounded-full bg-brand-dark" />
                           )}
                         </div>
-                        <span className="text-xl">{method.icon}</span>
+                        <method.Icon className="w-5 h-5 text-gray-500" strokeWidth={1.5} />
                         <div className="flex-1">
                           <p className="text-sm font-medium text-brand-dark">{method.label}</p>
                           <p className="text-xs text-gray-400">{method.desc}</p>

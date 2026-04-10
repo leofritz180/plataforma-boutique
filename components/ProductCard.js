@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useCart } from '@/lib/CartContext'
+import { Flame, Heart } from 'lucide-react'
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
@@ -52,7 +53,8 @@ export default function ProductCard({ product }) {
 
           {/* Badge (mais vendido / favorito) */}
           {badge && (
-            <span className="absolute top-2 right-2 bg-white/95 backdrop-blur-sm text-brand-dark px-2 py-1 text-[10px] font-semibold rounded-full shadow-sm">
+            <span className="absolute top-2 right-2 bg-white/95 backdrop-blur-sm text-brand-dark px-2.5 py-1 text-[10px] font-semibold rounded-full shadow-sm flex items-center gap-1">
+              {badge === 'Mais vendido' ? <Flame className="w-3 h-3 text-red-500" /> : <Heart className="w-3 h-3 text-pink-500" />}
               {badge}
             </span>
           )}

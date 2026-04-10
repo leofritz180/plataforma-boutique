@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { Gift, Package, Heart } from 'lucide-react'
 
 export default function ContaPage() {
   const [tab, setTab] = useState('login')
@@ -183,12 +184,12 @@ export default function ContaPage() {
           {/* Benefícios */}
           <div className="mt-8 space-y-3">
             {[
-              { icon: '🎁', text: '10% de desconto na primeira compra' },
-              { icon: '📦', text: 'Acompanhe seus pedidos' },
-              { icon: '💖', text: 'Salve seus produtos favoritos' },
+              { Icon: Gift, text: '10% de desconto na primeira compra' },
+              { Icon: Package, text: 'Acompanhe seus pedidos' },
+              { Icon: Heart, text: 'Salve seus produtos favoritos' },
             ].map((item) => (
               <div key={item.text} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm">
-                <span>{item.icon}</span>
+                <item.Icon className="w-5 h-5 text-brand-pink-dark flex-shrink-0" strokeWidth={1.5} />
                 <span className="text-sm text-gray-600">{item.text}</span>
               </div>
             ))}

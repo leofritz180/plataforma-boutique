@@ -62,9 +62,9 @@ function ProductsContent() {
     } else if (filterParam === 'promocoes') {
       result = products.filter((p) => p.tag === 'Promo')
     } else if (filterParam === 'mais-vendidos') {
-      result = products.filter((p) => p.badge === '🔥 Mais vendido')
+      result = products.filter((p) => p.badge === 'Mais vendido')
     } else if (filterParam === 'favoritos') {
-      result = products.filter((p) => p.badge === '💖 Favorito')
+      result = products.filter((p) => p.badge === 'Favorito')
     }
 
     // Ordenação

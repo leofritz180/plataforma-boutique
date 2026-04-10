@@ -6,6 +6,7 @@ import Link from 'next/link'
 import ProductGrid from '@/components/ProductGrid'
 import { useCart } from '@/lib/CartContext'
 import { getProductById, getRelatedProducts } from '@/lib/data'
+import { Truck, RefreshCw, ShieldCheck, Zap } from 'lucide-react'
 
 export default function ProductPage() {
   const { id } = useParams()
@@ -264,13 +265,13 @@ export default function ProductPage() {
               {/* Info extras */}
               <div className="space-y-3 pb-6 border-b border-gray-100">
                 {[
-                  { icon: '🚚', text: 'Frete grátis acima de R$ 199' },
-                  { icon: '🔄', text: 'Troca grátis em até 30 dias' },
-                  { icon: '🔒', text: 'Pagamento 100% seguro' },
-                  { icon: '⚡', text: 'Envio em até 24h úteis' },
+                  { Icon: Truck, text: 'Frete grátis acima de R$ 199' },
+                  { Icon: RefreshCw, text: 'Troca grátis em até 30 dias' },
+                  { Icon: ShieldCheck, text: 'Pagamento 100% seguro' },
+                  { Icon: Zap, text: 'Envio em até 24h úteis' },
                 ].map((info) => (
                   <div key={info.text} className="flex items-center gap-3">
-                    <span className="text-base">{info.icon}</span>
+                    <info.Icon className="w-4.5 h-4.5 text-brand-pink-dark flex-shrink-0" strokeWidth={1.5} />
                     <span className="text-sm text-gray-600">{info.text}</span>
                   </div>
                 ))}

@@ -5,12 +5,13 @@ import MonteSeuLook from '@/components/MonteSeuLook'
 import ProvaSocial from '@/components/ProvaSocial'
 import { products } from '@/lib/data'
 import Link from 'next/link'
+import { Flame, Sparkles, Tag, Heart } from 'lucide-react'
 
 export default function Home() {
   const novidades = products.filter((p) => p.tag === 'Novo')
-  const maisVendidos = products.filter((p) => p.badge === '🔥 Mais vendido')
+  const maisVendidos = products.filter((p) => p.badge === 'Mais vendido')
   const promos = products.filter((p) => p.tag === 'Promo')
-  const favoritos = products.filter((p) => p.badge === '💖 Favorito')
+  const favoritos = products.filter((p) => p.badge === 'Favorito')
 
   return (
     <>
@@ -22,14 +23,14 @@ export default function Home() {
         <div className="container-custom">
           <div className="flex items-end justify-between mb-8 md:mb-10">
             <div>
-              <h2 className="section-title">Mais vendidos 🔥</h2>
+              <h2 className="section-title flex items-center gap-2">
+                Mais vendidos <Flame className="w-6 h-6 md:w-7 md:h-7 text-red-500 inline" />
+              </h2>
               <p className="section-subtitle">Os queridinhos que não param de sair</p>
             </div>
             <Link href="/produtos?filtro=mais-vendidos" className="hidden md:inline-flex items-center gap-1 text-xs tracking-widest uppercase font-medium text-brand-dark hover:text-brand-pink-dark transition-colors">
               Ver tudo
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
             </Link>
           </div>
           <ProductGrid products={maisVendidos} />
@@ -41,21 +42,19 @@ export default function Home() {
         <div className="container-custom pt-16 md:pt-24">
           <div className="flex items-end justify-between mb-8 md:mb-10">
             <div>
-              <h2 className="section-title">Novidades da semana ✨</h2>
+              <h2 className="section-title flex items-center gap-2">
+                Novidades da semana <Sparkles className="w-6 h-6 md:w-7 md:h-7 text-amber-400 inline" />
+              </h2>
               <p className="section-subtitle">Acabou de chegar e já está fazendo sucesso</p>
             </div>
             <Link href="/produtos?filtro=novidades" className="hidden md:inline-flex items-center gap-1 text-xs tracking-widest uppercase font-medium text-brand-dark hover:text-brand-pink-dark transition-colors">
               Ver tudo
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
             </Link>
           </div>
           <ProductGrid products={novidades} />
           <div className="md:hidden text-center mt-8">
-            <Link href="/produtos?filtro=novidades" className="btn-outline inline-block">
-              Ver todas as novidades
-            </Link>
+            <Link href="/produtos?filtro=novidades" className="btn-outline inline-block">Ver todas as novidades</Link>
           </div>
         </div>
       </section>
@@ -96,14 +95,15 @@ export default function Home() {
           <div className="container-custom">
             <div className="flex items-end justify-between mb-8 md:mb-10">
               <div>
-                <h2 className="section-title">Promoções <span className="italic font-light text-red-500">imperdíveis</span> 🏷️</h2>
+                <h2 className="section-title flex items-center gap-2">
+                  Promoções <span className="italic font-light text-red-500">imperdíveis</span>
+                  <Tag className="w-6 h-6 md:w-7 md:h-7 text-red-400 inline" />
+                </h2>
                 <p className="section-subtitle">Aproveite antes que acabe — estoque limitado</p>
               </div>
               <Link href="/produtos?filtro=promocoes" className="hidden md:inline-flex items-center gap-1 text-xs tracking-widest uppercase font-medium text-brand-dark hover:text-brand-pink-dark transition-colors">
                 Ver tudo
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
               </Link>
             </div>
             <ProductGrid products={promos} />
@@ -116,7 +116,9 @@ export default function Home() {
         <section className="py-16 md:py-24 bg-brand-nude-light/50">
           <div className="container-custom">
             <div className="text-center mb-8 md:mb-10">
-              <h2 className="section-title">Favoritos das clientes 💖</h2>
+              <h2 className="section-title flex items-center justify-center gap-2">
+                Favoritos das clientes <Heart className="w-6 h-6 md:w-7 md:h-7 text-pink-400 inline" />
+              </h2>
               <p className="section-subtitle">As peças mais amadas da nossa loja</p>
             </div>
             <ProductGrid products={favoritos} />
