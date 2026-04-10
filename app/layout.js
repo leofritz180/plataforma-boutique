@@ -1,6 +1,9 @@
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import CartDrawer from '@/components/CartDrawer'
+import WhatsAppButton from '@/components/WhatsAppButton'
+import { CartProvider } from '@/lib/CartContext'
 
 export const metadata = {
   title: 'Plataforma Boutique | Moda Feminina Online',
@@ -12,11 +15,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <CartDrawer />
+          <WhatsAppButton />
+        </CartProvider>
       </body>
     </html>
   )
