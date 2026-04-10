@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { Flame, Heart, Zap, Truck } from 'lucide-react'
+import { Flame, Heart, Zap, Truck, CreditCard, RefreshCw, ShieldCheck } from 'lucide-react'
 
 const slides = [
   {
@@ -172,12 +172,12 @@ export default function HeroCarousel() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8">
             {[
               { Icon: Truck, text: 'Frete grátis acima de R$ 199' },
-              { Icon: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>, text: 'Até 6x sem juros' },
-              { Icon: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 19.644l3.181-3.183" /></svg>, text: 'Troca grátis em 30 dias' },
-              { Icon: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>, text: 'Compra 100% segura' },
+              { Icon: CreditCard, text: 'Até 6x sem juros' },
+              { Icon: RefreshCw, text: 'Troca grátis em 30 dias' },
+              { Icon: ShieldCheck, text: 'Compra 100% segura' },
             ].map((benefit) => (
               <div key={benefit.text} className="flex items-center justify-center gap-2 text-center">
-                <benefit.Icon className="w-4 h-4 text-white/70" />
+                <benefit.Icon className="w-4 h-4 text-white/70" strokeWidth={1.5} />
                 <span className="text-2xs md:text-xs text-white/80 tracking-wide">{benefit.text}</span>
               </div>
             ))}
