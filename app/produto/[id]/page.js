@@ -266,7 +266,7 @@ export default function ProductPage() {
               <div className="space-y-3 pb-6 border-b border-gray-100">
                 {[
                   { Icon: Truck, text: 'Frete grátis acima de R$ 199' },
-                  { Icon: RefreshCw, text: 'Troca grátis em até 30 dias' },
+                  { Icon: RefreshCw, text: 'Troca grátis em até 7 dias' },
                   { Icon: ShieldCheck, text: 'Pagamento 100% seguro' },
                   { Icon: Zap, text: 'Envio em até 24h úteis' },
                 ].map((info) => (

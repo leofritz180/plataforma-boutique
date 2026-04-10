@@ -173,7 +173,7 @@ export default function HeroCarousel() {
             {[
               { Icon: Truck, text: 'Frete grátis acima de R$ 199' },
               { Icon: CreditCard, text: 'Até 6x sem juros' },
-              { Icon: RefreshCw, text: 'Troca grátis em 30 dias' },
+              { Icon: RefreshCw, text: 'Troca grátis em 7 dias' },
               { Icon: ShieldCheck, text: 'Compra 100% segura' },
             ].map((benefit) => (
               <div key={benefit.text} className="flex items-center justify-center gap-2 text-center">

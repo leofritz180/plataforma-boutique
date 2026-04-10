@@ -15,9 +15,8 @@ const navLinks = [
 ]
 
 const promoTexts = [
-  'FRETE GRÁTIS ACIMA DE R$199',
-  'PARCELE EM ATÉ 6X SEM JUROS',
-  'TROCA GRÁTIS EM 30 DIAS',
+  'FRETE GRÁTIS ACIMA DE R$199 | PARCELE EM ATÉ 6X SEM JUROS',
+  'TROCA GRÁTIS EM 7 DIAS | COMPRA 100% SEGURA',
 ]
 
 export default function Header() {
@@ -36,15 +35,13 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Rotação do texto promocional
   useEffect(() => {
     const interval = setInterval(() => {
       setPromoIndex((prev) => (prev + 1) % promoTexts.length)
-    }, 3500)
+    }, 4000)
     return () => clearInterval(interval)
   }, [])
 
-  // Lock body scroll no menu mobile
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -53,7 +50,7 @@ export default function Header() {
   function handleSearch(e) {
     e.preventDefault()
     if (searchQuery.trim()) {
-      router.push(`/produtos`)
+      router.push('/produtos')
       setSearchOpen(false)
       setSearchQuery('')
     }
@@ -62,12 +59,12 @@ export default function Header() {
   return (
     <>
       {/* === TOP BAR === */}
-      <div className="bg-brand-dark text-white overflow-hidden">
+      <div className="bg-black text-white/80 overflow-hidden">
         <div className="container-custom py-2">
           <div className="relative h-4 flex items-center justify-center">
             <p
               key={promoIndex}
-              className="text-[10px] md:text-xs tracking-[0.15em] uppercase font-medium animate-fade-in-up absolute"
+              className="text-[10px] md:text-[11px] tracking-[0.18em] uppercase font-light animate-fade-in-up absolute"
             >
               {promoTexts[promoIndex]}
             </p>
@@ -76,86 +73,80 @@ export default function Header() {
       </div>
 
       {/* === HEADER PRINCIPAL === */}
-      <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
-        {/* Linha principal */}
+      <header className={`sticky top-0 z-50 bg-black transition-all duration-300 ${scrolled ? 'shadow-[0_4px_20px_rgba(0,0,0,0.3)]' : ''}`}>
         <div className="container-custom">
-          <div className="flex items-center justify-between h-16 md:h-[72px] gap-4">
+          <div className="flex items-center justify-between h-[60px] md:h-[68px] gap-4">
 
-            {/* ESQUERDA: Hamburger mobile / Busca desktop */}
+            {/* ESQUERDA */}
             <div className="flex items-center gap-2 flex-1">
-              {/* Hamburger mobile */}
               <button
                 onClick={() => setMenuOpen(true)}
-                className="lg:hidden p-2 -ml-2 hover:bg-gray-50 rounded-lg transition-colors"
+                className="lg:hidden p-2 -ml-2 hover:bg-white/10 rounded-lg transition-colors"
                 aria-label="Menu"
               >
-                <Menu className="w-5 h-5 text-brand-dark" strokeWidth={1.5} />
+                <Menu className="w-5 h-5 text-white" strokeWidth={1.5} />
               </button>
 
               {/* Busca desktop */}
-              <div className="hidden lg:block flex-1 max-w-md">
+              <div className="hidden lg:block flex-1 max-w-sm">
                 <form onSubmit={handleSearch} className="relative">
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Olá, o que você procura?"
-                    className="w-full py-2.5 pl-11 pr-4 bg-gray-50 border border-gray-100 rounded-full text-sm text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-pink focus:bg-white transition-all"
+                    className="w-full py-2.5 pl-10 pr-4 bg-white/10 border border-white/10 rounded-full text-sm text-white placeholder-white/40 focus:outline-none focus:bg-white/15 focus:border-white/25 transition-all"
                   />
-                  <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" strokeWidth={1.5} />
+                  <Search className="w-4 h-4 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2" strokeWidth={1.5} />
                 </form>
               </div>
             </div>
 
             {/* CENTRO: Logo */}
             <Link href="/" className="flex-shrink-0 text-center">
-              <h1 className="font-display text-xl md:text-[26px] tracking-tight text-brand-dark leading-none">
+              <h1 className="font-display text-[22px] md:text-[28px] tracking-[0.02em] text-white leading-none">
                 <span className="font-semibold">Plataforma</span>
-                <span className="font-light italic ml-1.5">Boutique</span>
+                <span className="font-light italic ml-1.5 text-white/80">Boutique</span>
               </h1>
             </Link>
 
-            {/* DIREITA: Ícones */}
-            <div className="flex items-center justify-end gap-1 md:gap-2 flex-1">
-              {/* Busca mobile */}
+            {/* DIREITA */}
+            <div className="flex items-center justify-end gap-1 md:gap-1.5 flex-1">
               <button
                 onClick={() => {
                   setSearchOpen(!searchOpen)
                   setTimeout(() => searchInputRef.current?.focus(), 100)
                 }}
-                className="lg:hidden p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                className="lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
                 aria-label="Buscar"
               >
-                <Search className="w-5 h-5 text-brand-dark" strokeWidth={1.5} />
+                <Search className="w-5 h-5 text-white" strokeWidth={1.5} />
               </button>
 
-              {/* Favoritos desktop */}
               <Link
                 href="/produtos?filtro=favoritos"
-                className="hidden md:flex p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                className="hidden md:flex p-2 hover:bg-white/10 rounded-lg transition-colors"
                 aria-label="Favoritos"
               >
-                <Heart className="w-5 h-5 text-brand-dark" strokeWidth={1.5} />
+                <Heart className="w-5 h-5 text-white" strokeWidth={1.5} />
               </Link>
 
-              {/* Conta */}
               <Link
                 href="/conta"
-                className="hidden md:flex p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                className="hidden md:flex p-2 hover:bg-white/10 rounded-lg transition-colors"
                 aria-label="Minha conta"
               >
-                <User className="w-5 h-5 text-brand-dark" strokeWidth={1.5} />
+                <User className="w-5 h-5 text-white" strokeWidth={1.5} />
               </Link>
 
-              {/* Carrinho */}
               <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 hover:bg-gray-50 rounded-lg transition-colors relative"
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors relative"
                 aria-label="Carrinho"
               >
-                <ShoppingBag className="w-5 h-5 text-brand-dark" strokeWidth={1.5} />
+                <ShoppingBag className="w-5 h-5 text-white" strokeWidth={1.5} />
                 {totalItems > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full font-bold">
+                  <span className="absolute -top-0.5 -right-0.5 bg-brand-pink text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full font-bold">
                     {totalItems}
                   </span>
                 )}
@@ -164,23 +155,23 @@ export default function Header() {
           </div>
         </div>
 
-        {/* === MENU DE CATEGORIAS DESKTOP === */}
-        <nav className="hidden lg:block border-t border-gray-100">
+        {/* === MENU CATEGORIAS DESKTOP === */}
+        <nav className="hidden lg:block border-t border-white/10">
           <div className="container-custom">
-            <div className="flex items-center justify-center gap-10 h-11">
+            <div className="flex items-center justify-center gap-10 h-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`text-[13px] tracking-[0.08em] uppercase font-medium transition-colors duration-200 relative group ${
+                  className={`text-[12px] tracking-[0.15em] uppercase font-medium transition-colors duration-200 relative group ${
                     link.highlight
-                      ? 'text-red-500 hover:text-red-600'
-                      : 'text-gray-600 hover:text-brand-dark'
+                      ? 'text-brand-pink hover:text-brand-pink-light'
+                      : 'text-white/70 hover:text-white'
                   }`}
                 >
                   {link.label}
-                  <span className={`absolute -bottom-[9px] left-0 right-0 h-[2px] transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100 ${
-                    link.highlight ? 'bg-red-500' : 'bg-brand-dark'
+                  <span className={`absolute -bottom-[8px] left-0 right-0 h-[2px] transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100 ${
+                    link.highlight ? 'bg-brand-pink' : 'bg-white'
                   }`} />
                 </Link>
               ))}
@@ -188,9 +179,9 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* === BARRA DE BUSCA MOBILE === */}
+        {/* === BUSCA MOBILE === */}
         {searchOpen && (
-          <div className="lg:hidden border-t border-gray-100 animate-slide-down">
+          <div className="lg:hidden border-t border-white/10 animate-slide-down bg-black">
             <div className="container-custom py-3">
               <form onSubmit={handleSearch} className="relative">
                 <input
@@ -199,13 +190,13 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Olá, o que você procura?"
-                  className="w-full py-3 pl-11 pr-12 bg-gray-50 border border-gray-100 rounded-full text-sm focus:outline-none focus:border-brand-pink focus:bg-white transition-all"
+                  className="w-full py-3 pl-11 pr-12 bg-white/10 border border-white/10 rounded-full text-sm text-white placeholder-white/40 focus:outline-none focus:bg-white/15 focus:border-white/25 transition-all"
                 />
-                <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" strokeWidth={1.5} />
+                <Search className="w-4 h-4 text-white/40 absolute left-4 top-1/2 -translate-y-1/2" strokeWidth={1.5} />
                 <button
                   type="button"
                   onClick={() => setSearchOpen(false)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-white/40 hover:text-white/70"
                 >
                   <X className="w-4 h-4" strokeWidth={1.5} />
                 </button>
@@ -215,79 +206,70 @@ export default function Header() {
         )}
       </header>
 
-      {/* === MENU MOBILE OVERLAY === */}
+      {/* === MENU MOBILE === */}
       {menuOpen && (
         <>
-          <div className="fixed inset-0 bg-black/50 z-[60] lg:hidden" onClick={() => setMenuOpen(false)} />
-          <div className="fixed top-0 left-0 bottom-0 w-[300px] max-w-[85vw] bg-white z-[70] lg:hidden overflow-y-auto animate-slide-in-right flex flex-col" style={{ animationName: 'slideInLeft' }}>
-            {/* Header do menu */}
-            <div className="flex items-center justify-between p-5 border-b border-gray-100">
-              <span className="font-display text-lg text-brand-dark">
+          <div className="fixed inset-0 bg-black/60 z-[60] lg:hidden backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+          <div
+            className="fixed top-0 left-0 bottom-0 w-[300px] max-w-[85vw] bg-black z-[70] lg:hidden overflow-y-auto flex flex-col"
+            style={{ animation: 'slideInLeft 0.3s ease-out forwards' }}
+          >
+            {/* Header menu */}
+            <div className="flex items-center justify-between p-5 border-b border-white/10">
+              <span className="font-display text-lg text-white">
                 <span className="font-semibold">Plataforma</span>
-                <span className="font-light italic ml-1">Boutique</span>
+                <span className="font-light italic ml-1 text-white/70">Boutique</span>
               </span>
-              <button onClick={() => setMenuOpen(false)} className="p-1.5 hover:bg-gray-100 rounded-lg" aria-label="Fechar">
-                <X className="w-5 h-5 text-brand-dark" strokeWidth={1.5} />
+              <button onClick={() => setMenuOpen(false)} className="p-1.5 hover:bg-white/10 rounded-lg" aria-label="Fechar">
+                <X className="w-5 h-5 text-white" strokeWidth={1.5} />
               </button>
             </div>
 
-            {/* Busca no menu */}
-            <div className="p-5 border-b border-gray-100">
+            {/* Busca */}
+            <div className="p-5 border-b border-white/10">
               <form onSubmit={(e) => { handleSearch(e); setMenuOpen(false); }} className="relative">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="O que você procura?"
-                  className="w-full py-2.5 pl-10 pr-4 bg-gray-50 border border-gray-100 rounded-full text-sm focus:outline-none focus:border-brand-pink transition-all"
+                  className="w-full py-2.5 pl-10 pr-4 bg-white/10 border border-white/10 rounded-full text-sm text-white placeholder-white/40 focus:outline-none focus:bg-white/15 transition-all"
                 />
-                <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" strokeWidth={1.5} />
+                <Search className="w-4 h-4 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2" strokeWidth={1.5} />
               </form>
             </div>
 
             {/* Links */}
             <nav className="flex-1 p-5">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-gray-400 font-medium mb-3">Categorias</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-medium mb-3">Categorias</p>
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`flex items-center justify-between py-3.5 border-b border-gray-50 transition-colors ${
+                  className={`flex items-center justify-between py-3.5 border-b border-white/5 transition-colors ${
                     link.highlight
-                      ? 'text-red-500 font-semibold'
-                      : 'text-brand-charcoal hover:text-brand-dark font-medium'
+                      ? 'text-brand-pink font-semibold'
+                      : 'text-white/70 hover:text-white font-medium'
                   }`}
                 >
                   <span className="text-sm tracking-wide">{link.label}</span>
-                  <ChevronRight className="w-4 h-4 text-gray-300" strokeWidth={1.5} />
+                  <ChevronRight className="w-4 h-4 text-white/20" strokeWidth={1.5} />
                 </Link>
               ))}
             </nav>
 
             {/* Footer menu */}
-            <div className="p-5 border-t border-gray-100 bg-gray-50/50">
-              <Link
-                href="/conta"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-3 py-2.5 text-sm text-gray-600 hover:text-brand-dark transition-colors"
-              >
+            <div className="p-5 border-t border-white/10">
+              <Link href="/conta" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 py-2.5 text-sm text-white/50 hover:text-white transition-colors">
                 <User className="w-4 h-4" strokeWidth={1.5} />
                 Minha Conta
               </Link>
-              <Link
-                href="/produtos?filtro=favoritos"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-3 py-2.5 text-sm text-gray-600 hover:text-brand-dark transition-colors"
-              >
+              <Link href="/produtos?filtro=favoritos" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 py-2.5 text-sm text-white/50 hover:text-white transition-colors">
                 <Heart className="w-4 h-4" strokeWidth={1.5} />
                 Favoritos
               </Link>
-              <Link
-                href="/checkout"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-3 py-2.5 text-sm text-gray-600 hover:text-brand-dark transition-colors"
-              >
+              <Link href="/checkout" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 py-2.5 text-sm text-white/50 hover:text-white transition-colors">
                 <ShoppingBag className="w-4 h-4" strokeWidth={1.5} />
                 Minha Sacola
               </Link>

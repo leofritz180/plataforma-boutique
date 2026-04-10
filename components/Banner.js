@@ -55,7 +55,7 @@ export default function Banner() {
             {[
               { icon: '🚚', text: 'Frete grátis acima de R$ 199' },
               { icon: '💳', text: 'Até 6x sem juros' },
-              { icon: '🔄', text: 'Troca grátis em 30 dias' },
+              { icon: '🔄', text: 'Troca grátis em 7 dias' },
               { icon: '🔒', text: 'Compra 100% segura' },
             ].map((benefit) => (
               <div key={benefit.text} className="flex items-center justify-center gap-2 text-center">
